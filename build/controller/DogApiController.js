@@ -54,16 +54,16 @@ var DogApi = /** @class */ (function () {
     //return a list of breeds
     DogApi.prototype.ListDogs = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var method, apiType, req_1, props, data, error_1;
+            var method, apiType, fetch_1, props, data, error_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         method = decoraters_1.Methods.get;
                         apiType = FetchClass_1.apiTypes.list;
-                        req_1 = new FetchClass_1.fetchClass(url, options, method, apiType);
+                        fetch_1 = new FetchClass_1.fetchClass(url, options, method, apiType);
                         props = { url: url, options: options, method: method, apiType: apiType };
-                        return [4 /*yield*/, req_1.Act(props)];
+                        return [4 /*yield*/, fetch_1.Act(props)];
                     case 1:
                         data = _a.sent();
                         res.json(data);
@@ -71,7 +71,6 @@ var DogApi = /** @class */ (function () {
                     case 2:
                         error_1 = _a.sent();
                         res.json(error_1);
-                        console.log(error_1);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
                 }
@@ -81,18 +80,17 @@ var DogApi = /** @class */ (function () {
     //return a list by search of breeds by name
     DogApi.prototype.searchDog = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var apiType, method, fetch_1, q, props, data, error_2;
+            var apiType, method, fetch_2, q, props, data, error_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         apiType = FetchClass_1.apiTypes.search;
                         method = decoraters_1.Methods.get;
-                        fetch_1 = new FetchClass_1.fetchClass(url, options, method, apiType);
-                        console.log('query');
+                        fetch_2 = new FetchClass_1.fetchClass(url, options, method, apiType);
                         q = req.query.q;
                         props = { url: url, options: options, method: method, apiType: apiType, q: q };
-                        return [4 /*yield*/, fetch_1.Act(props)];
+                        return [4 /*yield*/, fetch_2.Act(props)];
                     case 1:
                         data = _a.sent();
                         res.json(data);
@@ -100,7 +98,6 @@ var DogApi = /** @class */ (function () {
                     case 2:
                         error_2 = _a.sent();
                         res.json(error_2);
-                        console.log(error_2);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
                 }
@@ -110,16 +107,16 @@ var DogApi = /** @class */ (function () {
     //return a list of catagories
     DogApi.prototype.ListCata = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var method, apiType, req_2, props, data, error_3;
+            var method, apiType, fetch_3, props, data, error_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         method = decoraters_1.Methods.get;
                         apiType = FetchClass_1.apiTypes.list;
-                        req_2 = new FetchClass_1.fetchClass(url, options, method, apiType);
+                        fetch_3 = new FetchClass_1.fetchClass(url, options, method, apiType);
                         props = { url: url, options: options, method: method, apiType: apiType };
-                        return [4 /*yield*/, req_2.Act(props)];
+                        return [4 /*yield*/, fetch_3.Act(props)];
                     case 1:
                         data = _a.sent();
                         res.json(data);
@@ -127,9 +124,41 @@ var DogApi = /** @class */ (function () {
                     case 2:
                         error_3 = _a.sent();
                         res.json(error_3);
-                        console.log(error_3);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    DogApi.prototype.votePost = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _a, image_id, sub_id, value, options_1, method, apiType, fetch_4, props, data, error_4;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        console.log(req.body);
+                        _b.label = 1;
+                    case 1:
+                        _b.trys.push([1, 3, , 4]);
+                        _a = req.body, image_id = _a.image_id, sub_id = _a.sub_id, value = _a.value;
+                        options_1 = {
+                            headers: { 'content-type': 'application/json', 'x-api-key': '197c642d-12e5-45db-9f38-fffae70e1853' },
+                            body: { image_id: image_id, sub_id: sub_id, value: value }
+                        };
+                        method = decoraters_1.Methods.post;
+                        apiType = FetchClass_1.apiTypes.post;
+                        fetch_4 = new FetchClass_1.fetchClass(url, options_1, method, apiType);
+                        props = { url: url, options: options_1, method: method, apiType: apiType };
+                        return [4 /*yield*/, fetch_4.Act(props)];
+                    case 2:
+                        data = _b.sent();
+                        res.json(data);
+                        return [3 /*break*/, 4];
+                    case 3:
+                        error_4 = _b.sent();
+                        res.json(error_4);
+                        return [3 /*break*/, 4];
+                    case 4: return [2 /*return*/];
                 }
             });
         });
@@ -143,6 +172,10 @@ var DogApi = /** @class */ (function () {
     __decorate([
         decoraters_1.get('/listCata')
     ], DogApi.prototype, "ListCata", null);
+    __decorate([
+        decoraters_1.post('/createVote'),
+        decoraters_1.bodyValidator('image_id', 'sub_id', 'value')
+    ], DogApi.prototype, "votePost", null);
     DogApi = __decorate([
         decoraters_1.controller('/dogs')
     ], DogApi);

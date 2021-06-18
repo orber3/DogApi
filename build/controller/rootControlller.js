@@ -6,19 +6,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var controller_1 = require("../decoraters/controller");
-var routes_1 = require("../decoraters/routes");
+var ControllerDec_1 = require("../decoraters/ControllerDec");
+var Routes_1 = require("../decoraters/Routes");
 var rootController = /** @class */ (function () {
     function rootController() {
     }
     rootController.prototype.getRoot = function (req, res) {
-        res.send("\n    <div>\n     <div> your are logged in </div>\n     <a href='/auth/logout'> LogOut </a>\n     </div>\n    \n      ");
+        res.send("\n    <div>\n     <div> DOG API </div>\n     </div>\n    \n      ");
     };
     __decorate([
-        routes_1.get('/')
+        Routes_1.get('/')
     ], rootController.prototype, "getRoot", null);
     rootController = __decorate([
-        controller_1.controller('')
+        ControllerDec_1.controller('')
     ], rootController);
     return rootController;
 }());

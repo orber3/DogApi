@@ -1,8 +1,5 @@
-import {NextFunction, Request,Response} from 'express'
+import { Request,Response} from 'express'
 import {get, controller , bodyValidator, post, Methods} from '../decoraters'
-import axios, { AxiosResponse ,AxiosError } from 'axios'
-import { AxiosPromise } from 'axios';
-import { apiReq } from '../decoraters/apiReq';
 import { fetchClass, apiTypes} from '../decoraters/FetchClass'
 
 const url = 'https://api.thedogapi.com/v1/breeds'
@@ -22,15 +19,14 @@ const options = {
        
           let method = Methods.get
           let apiType = apiTypes.list
-          let req = new fetchClass(  url , options, method, apiType)
+          let fetch = new fetchClass(  url , options, method, apiType)
           const props = { url , options , method , apiType}
-          const data = await req.Act( props);
+          const data = await fetch.Act( props);
           res.json(data);
 
         } catch  (error) {    
           res.json(error);
 
-          console.log(error)
           
         }
       }
@@ -43,7 +39,6 @@ const options = {
           let apiType = apiTypes.search
           let method = Methods.get
           let fetch = new fetchClass(  url , options, method, apiType )
-          console.log('query')
             
           let q= req.query.q
 
@@ -53,7 +48,6 @@ const options = {
 
         } catch  (error) {    
           res.json(error);
-          console.log(error)
           
         }
       }
@@ -65,18 +59,42 @@ const options = {
        
           let method = Methods.get
           let apiType = apiTypes.list
-          let req = new fetchClass(  url , options, method, apiType)
+          let fetch = new fetchClass(  url , options, method, apiType)
           const props = { url , options , method , apiType}
-          const data = await req.Act( props);
+          const data = await fetch.Act( props);
           res.json(data);
 
         } catch  (error) {    
+          res.json(error);          
+        }
+      }
+      @post('/createVote')
+      @bodyValidator('image_id', 'sub_id', 'value')
+      async votePost (req: Request,res: Response) { 
+        console.log(req.body)
+        try {
+          const {image_id , sub_id, value } = req.body
+          const options =  {
+           headers: { 'content-type': 'application/json' ,'x-api-key': '197c642d-12e5-45db-9f38-fffae70e1853' },
+            body: { image_id , sub_id , value}
+        };
+
+          let method = Methods.post
+          let apiType = apiTypes.post
+          let fetch = new fetchClass(  url , options, method, apiType)
+          const props = { url , options , method , apiType}
+          
+          const data = await fetch.Act(props);
+
+          res.json(data);
+          
+        } catch  (error) {   
           res.json(error);
 
-          console.log(error)
           
         }
       }
+      
 
 
           }

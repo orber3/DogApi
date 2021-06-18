@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express"
-import { controller } from "../decoraters/controller"
-import { get } from "../decoraters/routes"
+import { controller } from "../decoraters/ControllerDec"
+import { get } from "../decoraters/Routes"
 
 @controller('')
 class rootController { 
@@ -9,8 +9,7 @@ getRoot(req: Request, res: Response)  {
   
     res.send(`
     <div>
-     <div> your are logged in </div>
-     <a href='/auth/logout'> LogOut </a>
+     <div> DOG API </div>
      </div>
     
       `)

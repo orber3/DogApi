@@ -10,6 +10,7 @@ require("./controller/rootControlller");
 var appRouter_1 = require("./appRouter");
 var app = express_1.default();
 app.use(body_parser_1.default.urlencoded({ extended: true }));
+app.use(body_parser_1.default.json({ type: 'application/*+json' }));
 app.use(appRouter_1.AppRouter.getInstance());
 app.get('/', function (req, res) {
     res.send("\n    <div>\n    <h1> hey </h1>\n    </div>\n\n  ");

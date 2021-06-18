@@ -1,5 +1,5 @@
 import 'reflect-metadata'
-import express, { NextFunction, Request, RequestHandler, Response } from 'express'
+import { NextFunction, Request, RequestHandler, Response } from 'express'
 import {AppRouter} from'../appRouter'
 import {Methods} from './Methods'
 import { MetadataKeys } from './MetadataKeys'
