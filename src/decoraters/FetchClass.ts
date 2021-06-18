@@ -8,7 +8,8 @@ export enum apiTypes {
   list='list',
   search='search',
   del='delete',
-  post='post'
+  post='post',
+  SingleId='SingleId'
 }
 
 interface axiosProps { 
@@ -58,6 +59,30 @@ async Act({url ,options,method,apiType,q}: axiosProps) {
         return e
       }
           }
+
+          case apiTypes.SingleId: {
+            try{    
+                const res= await axios.get( `${url}/${q}` , options)
+                return res
+            }catch(e)
+            {
+              console.log(e)
+              return e
+            }
+                }
+      
+            case apiTypes.del: { 
+              try{    
+                const res= await axios.delete( `${url}/${q}` , options)
+                return res
+            }catch(e)
+            {
+              console.log(e)
+              return e
+            }
+            }
+
+
 
 
           default: 

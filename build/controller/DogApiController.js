@@ -130,16 +130,14 @@ var DogApi = /** @class */ (function () {
             });
         });
     };
+    //post a vote
     DogApi.prototype.votePost = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
             var _a, image_id, sub_id, value, options_1, method, apiType, fetch_4, props, data, error_4;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        console.log(req.body);
-                        _b.label = 1;
-                    case 1:
-                        _b.trys.push([1, 3, , 4]);
+                        _b.trys.push([0, 2, , 3]);
                         _a = req.body, image_id = _a.image_id, sub_id = _a.sub_id, value = _a.value;
                         options_1 = {
                             headers: { 'content-type': 'application/json', 'x-api-key': '197c642d-12e5-45db-9f38-fffae70e1853' },
@@ -150,15 +148,72 @@ var DogApi = /** @class */ (function () {
                         fetch_4 = new FetchClass_1.fetchClass(url, options_1, method, apiType);
                         props = { url: url, options: options_1, method: method, apiType: apiType };
                         return [4 /*yield*/, fetch_4.Act(props)];
-                    case 2:
+                    case 1:
                         data = _b.sent();
                         res.json(data);
-                        return [3 /*break*/, 4];
-                    case 3:
+                        return [3 /*break*/, 3];
+                    case 2:
                         error_4 = _b.sent();
                         res.json(error_4);
-                        return [3 /*break*/, 4];
-                    case 4: return [2 /*return*/];
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    //get single favorite dog
+    DogApi.prototype.FavoriteDog = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var url_1, apiType, method, fetch_5, q, props, data, error_5;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        url_1 = 'https://api.thedogapi.com/v1/favourites/';
+                        apiType = FetchClass_1.apiTypes.SingleId;
+                        method = decoraters_1.Methods.get;
+                        fetch_5 = new FetchClass_1.fetchClass(url_1, options, method, apiType);
+                        q = req.params.id;
+                        props = { url: url_1, options: options, method: method, apiType: apiType, q: q };
+                        return [4 /*yield*/, fetch_5.Act(props)];
+                    case 1:
+                        data = (_a.sent()).data;
+                        res.json(data);
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_5 = _a.sent();
+                        res.json(error_5);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    //delete a single vote
+    DogApi.prototype.DeleteVote = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var url_2, apiType, method, fetch_6, q, props, data, error_6;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        url_2 = 'https://api.thedogapi.com/v1/votes';
+                        apiType = FetchClass_1.apiTypes.del;
+                        method = decoraters_1.Methods.del;
+                        fetch_6 = new FetchClass_1.fetchClass(url_2, options, method, apiType);
+                        q = req.params.id;
+                        console.log(q);
+                        props = { url: url_2, options: options, method: method, apiType: apiType, q: q };
+                        return [4 /*yield*/, fetch_6.Act(props)];
+                    case 1:
+                        data = _a.sent();
+                        res.json(data);
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_6 = _a.sent();
+                        res.json(error_6);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
                 }
             });
         });
@@ -176,6 +231,12 @@ var DogApi = /** @class */ (function () {
         decoraters_1.post('/createVote'),
         decoraters_1.bodyValidator('image_id', 'sub_id', 'value')
     ], DogApi.prototype, "votePost", null);
+    __decorate([
+        decoraters_1.get('/favouriteDog/:id')
+    ], DogApi.prototype, "FavoriteDog", null);
+    __decorate([
+        decoraters_1.del('/votes/:id')
+    ], DogApi.prototype, "DeleteVote", null);
     DogApi = __decorate([
         decoraters_1.controller('/dogs')
     ], DogApi);

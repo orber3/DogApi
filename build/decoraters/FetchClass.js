@@ -47,6 +47,7 @@ var apiTypes;
     apiTypes["search"] = "search";
     apiTypes["del"] = "delete";
     apiTypes["post"] = "post";
+    apiTypes["SingleId"] = "SingleId";
 })(apiTypes = exports.apiTypes || (exports.apiTypes = {}));
 var fetchClass = /** @class */ (function () {
     function fetchClass(url, options, method, apiType) {
@@ -54,7 +55,7 @@ var fetchClass = /** @class */ (function () {
     fetchClass.prototype.Act = function (_a) {
         var url = _a.url, options = _a.options, method = _a.method, apiType = _a.apiType, q = _a.q;
         return __awaiter(this, void 0, void 0, function () {
-            var _b, data_1, e_1, res, e_2, res, e_3, data;
+            var _b, data_1, e_1, res, e_2, res, e_3, res, e_4, res, e_5, data;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
@@ -63,8 +64,10 @@ var fetchClass = /** @class */ (function () {
                             case apiTypes.list: return [3 /*break*/, 1];
                             case apiTypes.search: return [3 /*break*/, 4];
                             case apiTypes.post: return [3 /*break*/, 7];
+                            case apiTypes.SingleId: return [3 /*break*/, 10];
+                            case apiTypes.del: return [3 /*break*/, 13];
                         }
-                        return [3 /*break*/, 10];
+                        return [3 /*break*/, 16];
                     case 1:
                         _c.trys.push([1, 3, , 4]);
                         return [4 /*yield*/, axios_1.default.get(url, options)];
@@ -98,6 +101,26 @@ var fetchClass = /** @class */ (function () {
                         console.log(e_3);
                         return [2 /*return*/, e_3];
                     case 10:
+                        _c.trys.push([10, 12, , 13]);
+                        return [4 /*yield*/, axios_1.default.get(url + "/" + q, options)];
+                    case 11:
+                        res = _c.sent();
+                        return [2 /*return*/, res];
+                    case 12:
+                        e_4 = _c.sent();
+                        console.log(e_4);
+                        return [2 /*return*/, e_4];
+                    case 13:
+                        _c.trys.push([13, 15, , 16]);
+                        return [4 /*yield*/, axios_1.default.delete(url + "/" + q, options)];
+                    case 14:
+                        res = _c.sent();
+                        return [2 /*return*/, res];
+                    case 15:
+                        e_5 = _c.sent();
+                        console.log(e_5);
+                        return [2 /*return*/, e_5];
+                    case 16:
                         data = 'error';
                         return [2 /*return*/, data];
                 }
